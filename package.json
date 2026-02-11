@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "ui-test": "node ui-test/ui.test.js"
+
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "chai": "^6.2.2",
     "mocha": "^11.7.5",
+    "selenium-webdriver": "^4.40.0",
     "supertest": "^7.2.2"
   }
 }
