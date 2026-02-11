@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Color Converter</title>
+</head>
+<body>
+
+<h1>Color Converter</h1>
+
+<h2>Hex → RGB</h2>
+<input id="hexInput" value="#ff00aa">
+<button onclick="convertHex()">Convert</button>
+<p id="hexResult"></p>
+
+<h2>RGB → Hex</h2>
+<input id="r" value="255" size="3">
+<input id="g" value="0" size="3">
+<input id="b" value="170" size="3">
+<button onclick="convertRgb()">Convert</button>
+<p id="rgbResult"></p>
+
+<script>
+async function convertHex() {
+  const hex = document.getElementById("hexInput").value;
+  const res = await fetch(`/api/hex-to-rgb?hex=${encodeURIComponent(hex)}`);
+  const data = await res.json();
+  document.getElementById("hexResult").textContent =
+    res.ok ? JSON.stringify(data.rgb) : "Error: " + data.error;
+}
+
+async function convertRgb() {
+  const r = document.getElementById("r").value;
+  const g = document.getElementById("g").value;
+  const b = document.getElementById("b").value;
+
+  const res = await fetch(`/api/rgb-to-hex?r=${r}&g=${g}&b=${b}`);
+  const data = await res.json();
+
+  document.getElementById("rgbResult").textContent =
+    res.ok ? data.hex : "Error: " + data.error;
+}
+</script>
+
+</body>
+</html>
